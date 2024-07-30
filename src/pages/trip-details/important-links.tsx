@@ -7,48 +7,54 @@ import { api } from "../../lib/axios";
 import { RegisterLinkModal } from "./modals/register-link-modal";
 
 interface TripLinks {
-    id: string;
-    title: string;
-    url: string;
+  id: string;
+  title: string;
+  url: string;
 }
 
 export function ImportantLinks() {
-    const { tripId } = useParams();
-    const [tripLinks, setTripLinks] = useState<TripLinks[]>([]);
-    const [isRegisterLinkModalOpen, setIsRegisterLinkModalOpen] = useState(false);
+  const { tripId } = useParams();
+  const [tripLinks, setTripLinks] = useState<TripLinks[]>([]);
+  const [isRegisterLinkModalOpen, setIsRegisterLinkModalOpen] = useState(false);
 
-    function openRegisterLinkModal() {
-        setIsRegisterLinkModalOpen(true);
-    }
+  function openRegisterLinkModal() {
+    setIsRegisterLinkModalOpen(true);
+  }
 
-    function closeRegisterLinkModal() {
-        setIsRegisterLinkModalOpen(false);
-    }
+  function closeRegisterLinkModal() {
+    setIsRegisterLinkModalOpen(false);
+  }
 
+  useEffect(() => {
+    api
+      .get(`/trips/${tripId}/links`)
+      .then((response) => setTripLinks(response.data.links))
+      .catch((error) => console.error(error));
+  }, [tripId]);
 
+  return (
+    <div className="space-y-6">
+      <h2 className="font-semibold text-xl">Links importantes</h2>
+      {tripLinks.length > 0 ? (
+        tripLinks.map((link) => (
+          <DetailsLinkListTile
+            key={link.id}
+            title={link.title}
+            url={link.url}
+          />
+        ))
+      ) : (
+        <p className="text-sm text-zinc-500">Nenhum link cadastrado</p>
+      )}
 
-    useEffect(() => {
-        api.get(`/trips/${tripId}/links`)
-            .then(response => setTripLinks(response.data.links)
-            ).catch(error => console.error(error));
-    }, [tripId]);
+      <Button variant="secondary" size="full" onClick={openRegisterLinkModal}>
+        <Plus className="size-5 "></Plus>
+        Cadastrar novo link
+      </Button>
 
-
-    return (
-        <div className="space-y-6">
-            <h2 className="font-semibold text-xl">Links importantes</h2>
-            {
-                tripLinks.length > 0
-                    ? tripLinks.map(link => <DetailsLinkListTile key={link.id} title={link.title} url={link.url} />)
-                    : (<p className="text-sm text-zinc-500">Nenhum link cadastrado</p>)
-            }
-
-            <Button variant='secondary' size="full" onClick={openRegisterLinkModal}>
-                <Plus className='size-5 '></Plus>
-                Cadastrar novo link
-            </Button>
-
-            {isRegisterLinkModalOpen && <RegisterLinkModal closeRegisterLinkModal={closeRegisterLinkModal} />}
-        </div>
-    )
+      {isRegisterLinkModalOpen && (
+        <RegisterLinkModal closeRegisterLinkModal={closeRegisterLinkModal} />
+      )}
+    </div>
+  );
 }

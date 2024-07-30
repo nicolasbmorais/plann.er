@@ -1,23 +1,22 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+type FormStatus = "idle" | "loading" | "success" | "error";
 
 const useFormStatus = () => {
-    const [status, setStatus] = useState<FormStatus>('idle');
+  const [status, setStatus] = useState<FormStatus>("idle");
 
-    const setIdle = () => setStatus('idle');
-    const setLoading = () => setStatus('loading');
-    const setSuccess = () => setStatus('success');
-    const setError = () => setStatus('error');
+  const setIdle = () => setStatus("idle");
+  const setLoading = () => setStatus("loading");
+  const setSuccess = () => setStatus("success");
+  const setError = () => setStatus("error");
 
-    return {
-        status,
-        setIdle,
-        setLoading,
-        setSuccess,
-        setError,
-    };
+  return {
+    status,
+    setIdle,
+    setLoading,
+    setSuccess,
+    setError,
+  };
 };
 
 export default useFormStatus;
-
