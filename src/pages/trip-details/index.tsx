@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { Activities } from "./activities";
-import { DestinationAndHeader } from "./desitnation-and-date-header";
+import { DestinationAndHeader } from "./destination-and-date-header";
 import { Guests } from "./guests";
 import { ImportantLinks } from "./important-links";
 import { CreateActivityModal } from "./modals/create-activity-modal";

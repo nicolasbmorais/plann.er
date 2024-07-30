@@ -1,9 +1,11 @@
-import { format } from "date-fns";
-import { Calendar, MapPin, X } from "lucide-react";
+import { MapPin, X } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { DateRange, DayPicker } from "react-day-picker";
+import { DateRange } from "react-day-picker";
 import { useParams } from "react-router-dom";
 import { Button } from "../../../components/button";
+import { DateButtonComponent } from "../../../components/date-button";
+import { ModalDatePickerComponent } from "../../../components/modal-date-picker";
+import { api } from "../../../lib/axios";
 
 interface ChangeLocalAndDateModalProps {
   closeChangeLocalAndDateModal: () => void;
@@ -16,13 +18,6 @@ export function ChangeLocalAndDateModal({
   const [destination, setDestination] = useState("");
   const [eventDate, setEventDates] = useState<DateRange | undefined>();
 
-  const displayedDate =
-    eventDate && eventDate.from && eventDate.to
-      ? format(eventDate.from, "d' de 'LLL")
-          .concat(" até ")
-          .concat(format(eventDate.to, "d' de 'LLL"))
-      : null;
-
   function openDatePicker() {
     return setIsDatePickerOpen(true);
   }
@@ -30,7 +25,6 @@ export function ChangeLocalAndDateModal({
   function closeDatePicker() {
     return setIsDatePickerOpen(false);
   }
-  // Descobrir o pq quando clico na modal de data a tela recarrega
 
   async function changeLocalAndDate(event: FormEvent<HTMLFormElement>) {
     if (!destination || !eventDate?.from || !eventDate?.to) {
@@ -38,18 +32,15 @@ export function ChangeLocalAndDateModal({
       return;
     }
 
-    console.log(destination, eventDate.from, eventDate.to);
-
-    // try {
-    //     await api.put(`/trips/${tripId}`, {
-    //         destination: destination,
-    //         starts_at: eventDate.from,
-    //         ends_at: eventDate.to,
-    //     });
-    // } catch (error) {
-    //     console.log(error);
-
-    // }
+    try {
+      await api.put(`/trips/${tripId}`, {
+        destination: destination,
+        starts_at: eventDate.from,
+        ends_at: eventDate.to,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -85,40 +76,23 @@ export function ChangeLocalAndDateModal({
               />
             </div>
 
-            <button
-              onClick={openDatePicker}
-              className="flex items-center gap-4 text-left W-[240px]"
-            >
-              <Calendar className="size-5 text-zinc-400 "></Calendar>
-              <span className="text-lg text-zinc-400 w-40 flex-1">
-                {displayedDate || "Quando?"}
-              </span>
-            </button>
+            <DateButtonComponent
+              isDisabled={false}
+              openDatePicker={openDatePicker}
+              eventDate={eventDate}
+            />
           </div>
 
           <Button variant="primary" size="full" type="submit">
             Alterar local e data
           </Button>
 
-          {/* Modal de selecionar data */}
           {isDatePickerOpen && (
-            <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
-              <div className="rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-semibold">Selecione a data</h2>
-                    <button type="button" onClick={closeDatePicker}>
-                      <X className="size-5 text-zinc-400"></X>
-                    </button>
-                  </div>
-                </div>
-                <DayPicker
-                  mode="range"
-                  selected={eventDate}
-                  onSelect={setEventDates}
-                />
-              </div>
-            </div>
+            <ModalDatePickerComponent
+              closeDatePicker={closeDatePicker}
+              eventDate={eventDate}
+              onSelect={setEventDates}
+            />
           )}
         </form>
       </div>
