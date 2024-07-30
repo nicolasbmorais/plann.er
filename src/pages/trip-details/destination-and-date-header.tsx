@@ -2,17 +2,11 @@ import { format } from "date-fns";
 import { Calendar, MapPin, Settings2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Trip } from "../../@types/trip";
 import { Button } from "../../components/button";
-import { api } from "../../lib/axios";
+import { api } from "../../services/axios";
 import { ChangeLocalAndDateModal } from "./modals/change-local-modal";
 
-interface Trip {
-  id: string;
-  destination: string;
-  starts_at: string;
-  ends_at: string;
-  is_confirmed: boolean;
-}
 export function DestinationAndHeader() {
   const { tripId } = useParams();
   const [tripDetails, setTripDetails] = useState<Trip | undefined>();

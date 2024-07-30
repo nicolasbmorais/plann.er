@@ -1,15 +1,15 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { CircleCheck } from "lucide-react";
-import { ActivityModel } from "../models/activity-model";
+import { Activity } from "../@types/trip";
 
 interface ActivitiesListTileProps {
-  activity: ActivityModel;
+  activity: Activity;
 }
 
 export function ActivitiesListTile({ activity }: ActivitiesListTileProps) {
   return (
-    <div  className="space-y-2.5">
+    <div className="space-y-2.5">
       <div className="flex gap-2 items-baseline">
         <span className="text-xl text-zinc-300 font-semibold">
           Dia {format(activity.date, "d")}

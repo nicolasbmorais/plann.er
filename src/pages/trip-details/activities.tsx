@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Activity } from "../../@types/trip";
 import { ActivitiesListTile } from "../../components/activities-list-tile";
-import { api } from "../../lib/axios";
-import { ActivityModel } from "../../models/activity-model";
+import { api } from "../../services/axios";
 
 export function Activities() {
   const { tripId } = useParams();
 
-  const [activities, setActivities] = useState<ActivityModel[]>([]);
+  const [activities, setActivities] = useState<Activity[]>([]);
 
   useEffect(() => {
     api

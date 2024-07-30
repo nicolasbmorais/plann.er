@@ -1,16 +1,11 @@
 import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { TripLinks } from "../../@types/trip";
 import { Button } from "../../components/button";
 import { DetailsLinkListTile } from "../../components/details-link-list-tile";
-import { api } from "../../lib/axios";
+import { api } from "../../services/axios";
 import { RegisterLinkModal } from "./modals/register-link-modal";
-
-interface TripLinks {
-  id: string;
-  title: string;
-  url: string;
-}
 
 export function ImportantLinks() {
   const { tripId } = useParams();

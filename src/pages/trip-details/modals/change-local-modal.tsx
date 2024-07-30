@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "../../../components/button";
 import { DateButtonComponent } from "../../../components/date-button";
 import { ModalDatePickerComponent } from "../../../components/modal-date-picker";
-import { api } from "../../../lib/axios";
+import { api } from "../../../services/axios";
 
 interface ChangeLocalAndDateModalProps {
   closeChangeLocalAndDateModal: () => void;

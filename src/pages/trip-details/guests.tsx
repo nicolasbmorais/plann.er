@@ -1,16 +1,10 @@
 import { CheckCircle2, CircleDashed, UserCog } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Participants } from "../../@types/trip";
 import { Button } from "../../components/button";
-import { api } from "../../lib/axios";
+import { api } from "../../services/axios";
 import { ManageGuestsModal } from "./modals/manage-guests-modal";
-
-interface Participants {
-  id: string;
-  name: string | null;
-  email: string;
-  is_confirmed: boolean;
-}
 
 export function Guests() {
   const { tripId } = useParams();

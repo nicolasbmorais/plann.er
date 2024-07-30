@@ -2,7 +2,7 @@ import { Calendar, Tag, X } from "lucide-react";
 import { FormEvent } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "../../../components/button";
-import { api } from "../../../lib/axios";
+import { api } from "../../../services/axios";
 
 interface CreateActivityModalProps {
   closeCreateActivityModal: () => void;
