@@ -92,7 +92,7 @@ A seguir, veja uma demonstração das principais telas da aplicação:
 
 ### 📝 Pre Requisites
 
-- Para reproduzir o acesso a API back-end com os dados necessários para o front-end, clone o seguinte [repositório](https://github.com/nicolasbmorais/planner-api) que contem a API do back-end feita em Node.js disponibilizado pela [Rocketseat] execute na sua máquina.
+- Para reproduzir o acesso a API back-end com os dados necessários para o front-end, clone o seguinte [repositório](https://github.com/nicolasbmorais/planner-api) que contem a API do back-end feita em Node.js disponibilizado pela `Rocketseat` execute na sua máquina.
 
 ### Cloning and Running
 
