@@ -1,6 +1,7 @@
 import { Link2, Tag, X } from "lucide-react";
 import { FormEvent } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 import { Button } from "../../../components/button";
 import { api } from "../../../services/axios";
 
@@ -22,7 +23,11 @@ export function RegisterLinkModal({
       return;
     }
 
-    await api.post(`/trips/${tripId}/links`, { title, url });
+    try {
+      await api.post(`/trips/${tripId}/links`, { title, url });
+    } catch (error) {
+      toast.error(`${error}`);
+    }
   }
 
   return (

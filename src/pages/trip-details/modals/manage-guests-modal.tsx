@@ -3,6 +3,7 @@ import { FormEvent } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "../../../components/button";
 import { api } from "../../../services/axios";
+import { toast } from "sonner";
 
 interface ManageGuestsModalProps {
   closeManageGuestsModal: () => void;
@@ -21,7 +22,11 @@ export function ManageGuestsModal({
       return;
     }
 
-    await api.post(`/trips/${tripId}/invites`, { email });
+    try {
+      await api.post(`/trips/${tripId}/invites`, { email });
+    } catch (error) {
+      toast.error(`${error}`);
+    }
   }
 
   return (

@@ -6,6 +6,7 @@ import { Button } from "../../../components/button";
 import { DateButtonComponent } from "../../../components/date-button";
 import { ModalDatePickerComponent } from "../../../components/modal-date-picker";
 import { api } from "../../../services/axios";
+import { toast } from "sonner";
 
 interface ChangeLocalAndDateModalProps {
   closeChangeLocalAndDateModal: () => void;
@@ -39,6 +40,7 @@ export function ChangeLocalAndDateModal({
         ends_at: eventDate.to,
       });
     } catch (error) {
+      toast.error(`${error}`);
       console.log(error);
     }
   }

@@ -3,6 +3,7 @@ import { FormEvent } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "../../../components/button";
 import { api } from "../../../services/axios";
+import { toast } from "sonner";
 
 interface CreateActivityModalProps {
   closeCreateActivityModal: () => void;
@@ -17,7 +18,11 @@ export function CreateActivityModal({
     const title = data.get("title")?.toString();
     const occurs_at = data.get("occurs_at")?.toString();
 
-    await api.post(`/trips/${tripId}/activities`, { title, occurs_at });
+    try {
+      await api.post(`/trips/${tripId}/activities`, { title, occurs_at });
+    } catch (error) {
+      toast.error(`${error}`);
+    }
   }
 
   return (
