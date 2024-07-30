@@ -1,12 +1,13 @@
 import { FormEvent, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { api } from "../../services/axios";
 import useFormStatus from "../../services/hooks/useFormStatus";
 import { ConfirmTripModal } from "./confirm-trip-modal";
 import { InviteGuestsModal } from "./invite-guests-modal";
 import { DestinationAndDateStep } from "./steps/destination-and-date-step";
 import { InviteGuestsStep } from "./steps/invite-guests-step";
-import { api } from "../../services/axios";
 
 export function CreateTripPage() {
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ export function CreateTripPage() {
       !ownerName ||
       !ownerEmail
     ) {
+      toast.warning("Preencha todos os campos");
       return;
     }
 
@@ -104,6 +106,7 @@ export function CreateTripPage() {
       navigate(`/trips/${tripId}`);
     } catch (error) {
       setError();
+      toast.error("O evento não pode ser marcado com datas antigas");
       console.error("Erro ao criar a viagem:", error);
     }
   }
@@ -169,6 +172,8 @@ export function CreateTripPage() {
           setOwnerName={setOwnerName}
           setOwnerEmail={setOwnerEmail}
           isLoading={status === "loading"}
+          eventDate={eventDate}
+          destination={destination}
         />
       )}
     </div>
