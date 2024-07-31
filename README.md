@@ -17,9 +17,9 @@
 
 O **Plann.er** consiste em uma aplicação web desenvolvida utilizando principalmente tecnologias como `ReactJS`, `TypeScript` e `Tailwind` para montar planos de viagem com amigos, registrar atividades e links úteis.
 
-<!-- ## 🔗 Deploy
+## 🔗 Deploy
 
-O deploy da aplicação pode ser acessada através da seguinte URL base: https://nicolasbmorais-nlw-expert-notes.vercel.app/ -->
+O deploy da aplicação pode ser acessada através da seguinte URL base: https://planner-henna.vercel.app/
 
 ## 🎨 Layout
 
