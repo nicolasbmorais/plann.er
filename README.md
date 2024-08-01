@@ -7,15 +7,11 @@
 </h4>
 
 <p align="center">
- <a href="#-about">About</a> | 
+ <a href="#-deploy">Deploy</a> | 
  <a href="#-layout">Layout</a> | 
  <a href="#-setup">Setup</a> | 
  <a href="#-technologies">Technologies</a> | 
 </p>
-
-## 💻 About
-
-O **Plann.er** consiste em uma aplicação web desenvolvida utilizando principalmente tecnologias como `ReactJS`, `TypeScript` e `Tailwind` para montar planos de viagem com amigos, registrar atividades e links úteis.
 
 ## 🔗 Deploy
 
